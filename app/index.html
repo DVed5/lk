@@ -88,16 +88,26 @@
 
 						<div class="dashboard-chat__bottom">
 
-							<input type="text" id="chat-message" placeholder="Введите сообщение для администратора">
-
-							<button id="send-message">
-								<img width="50" height="50" src="images/enter.svg" alt="Отправить">
-								Enter
-							</button>
+							<input class="dashboard-chat__bottom-input" type="text" id="chat-message"
+								placeholder="Введите сообщение для администратора">
+							<div class="dashboard-chat__bottom-buttons">
+								<div class="dashboard-chat__bottom-buttons__add">
+									<button class="dashboard-chat__bottom-buttons__file">
+										<img width="24" height="24" src="images/add-file.svg" alt="Загрузить файл">
+									</button>
+									<button class="dashboard-chat__bottom-buttons__image">
+										<img width="24" height="24" src="images/add-img.svg" alt="Загрузить картинку">
+									</button>
+								</div>
+								<button id="send-message" class="dashboard-chat__bottom-buttons__enter">
+									<img width="50" height="50" src="images/enter.svg" alt="Отправить">
+									Enter
+								</button>
+							</div>
 						</div>
 					</div>
 
-				
+
 				</div>
 			</div>
 		</div>
@@ -106,7 +116,7 @@
 	<footer class="footer">
 		<div class="container">
 			<div class="footer__wrapper">
-				<img class="footer__logo" width="219" height="32" src="images/logo-gray.svg" alt="Логотип Pink Chicken">
+				<img class="footer__logo logo" width="219" height="32" src="images/logo-gray.svg" alt="Логотип Pink Chicken">
 				<a class="footer__conf" href="#">Политика конфиденциальности</a>
 				<div class="footer__mail">
 					<img class="footer__mail-icon" width="24" height="24" src="images/footer-mail.svg" alt="Наша почта">
