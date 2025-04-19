@@ -40,37 +40,64 @@
 		<div class="container">
 			<div class="dashboard">
 				<div class="dashboard-files">
-					<h2 class="dashboard-files__title">
+					<h2 class="dashboard-files__title title">
 						Файлы
 					</h2>
 					<div class="dashboard-files__section" id="media-files">
-						<p class="dashboard-files__info">
-							Закажи у личного помощника медиаплан. Он появится в этом разделе
-						</p>
+						<div class="dashboard-files__info">
+							<img class="dashboard-files__info__img" width="256" height="314" src="images/files-info.png" alt="">
+							<p class="dashboard-files__info__text">Закажи у личного помощника медиаплан. Он появится в этом разделе
+							</p>
+						</div>
 					</div>
 					<div class="dashboard-files__section" id="report-files"></div>
 				</div>
 
 				<div class="dashboard-chat">
-					<div class="chat-header">
-						<strong>Личный помощник</strong>
-						<span>Jim Davidson <a href="mailto:jim@adaurum.ru">jim@adaurum.ru</a></span>
+					<div class="dashboard-chat__top">
+						<h2 class="dashboard-chat__top-title title">Личный помощник</h2>
+						<div class="dashboard-chat__top-name">
+							<span class="dashboard-chat__top-name__first">
+								Jim Davidson
+							</span>
+							<span class="dashboard-chat__top-name__second">Jim Davidson@adaurum.ru</span>
+						</div>
+						<button>
+							<img class="dashboard-chat__top-more" width="40" height="40" src="images/more.svg"
+								alt="Посмотреть больше информации">
+						</button>
 					</div>
-					<div class="chat-body" id="chat-body">
-						<div class="assistant-welcome">
-							<img src="assistant.png" alt="Ассистент" />
-							<p>Это чат с администратором. Ты можешь с ним пообщаться по любому вопросу о нашем сервисе и узнать о ходе
-								работы</p>
-							<div class="buttons">
-								<button id="order-media">Заказать медиаплан</button>
-								<button id="order-report">Заказать отчет</button>
+
+					<div class="dashboard-chat__body" id="chat-body">
+
+						<div class="dashboard-chat__body-welcome">
+							<img class="dashboard-chat__body-welcome__img" width="190" height="193" src="images/admin.png" alt="">
+							<p class="dashboard-chat__body-welcome__text">
+								Это чат с администратором. Ты можешь с ним пообщаться по любому вопросу о нашем сервисе и узнать о ходе
+								работы
+							</p>
+							<div class="dashboard-chat__body-welcome__buttons">
+								<button class="dashboard-chat__body-welcome__buttons-first" id="order-media">
+									Заказать медиаплан
+								</button>
+								<button class="dashboard-chat__body-welcome__buttons-second" id="order-report">
+									Заказать отчет
+								</button>
 							</div>
 						</div>
+
+						<div class="dashboard-chat__bottom">
+
+							<input type="text" id="chat-message" placeholder="Введите сообщение для администратора">
+
+							<button id="send-message">
+								<img width="50" height="50" src="images/enter.svg" alt="Отправить">
+								Enter
+							</button>
+						</div>
 					</div>
-					<div class="chat-input">
-						<input type="text" id="chat-message" placeholder="Введите сообщение для администратора" />
-						<button id="send-message">➤</button>
-					</div>
+
+				
 				</div>
 			</div>
 		</div>
