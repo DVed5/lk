@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Pink Chicken</title>
+	<link rel="stylesheet" href="css/style.min.css">
+</head>
+
+<body>
+	<header class="header">
+		<div class="container">
+			<div class="header__wrapper">
+				<img class="header__logo" width="219" height="32" src="images/logo.svg" alt="Логотип Pink Chicken">
+				<div class="header__percent">
+					<img class="header__percent-icon" width="40" height="40" src="images/header-percent.svg"
+						alt="Процент конвертации">
+					<p class="header__percent-value">5%</p>
+				</div>
+				<div class="header__username">
+					<img class="header__username-icon" width="40" height="40" src="images/header-user.svg"
+						alt="Логин пользователя">
+					<p class="header__username-lodin">Username@adaurum.ru</p>
+				</div>
+				<div class="header__settings">
+					<img class="header__settings-icon" width="40" height="40" src="images/header-settings.svg" alt="Настройки">
+				</div>
+				<div class="header__exit">
+					<img class="header__exit-icon" width="40" height="40" src="images/header-exit.svg"
+						alt="Выход из личного кабинета">
+				</div>
+			</div>
+
+		</div>
+	</header>
+
+	<main>
+		<div class="container">
+			<div class="dashboard">
+				<div class="dashboard-files">
+					<h2 class="dashboard-files__title">
+						Файлы
+					</h2>
+					<div class="dashboard-files__section" id="media-files">
+						<p class="dashboard-files__info">
+							Закажи у личного помощника медиаплан. Он появится в этом разделе
+						</p>
+					</div>
+					<div class="dashboard-files__section" id="report-files"></div>
+				</div>
+
+				<div class="dashboard-chat">
+					<div class="chat-header">
+						<strong>Личный помощник</strong>
+						<span>Jim Davidson <a href="mailto:jim@adaurum.ru">jim@adaurum.ru</a></span>
+					</div>
+					<div class="chat-body" id="chat-body">
+						<div class="assistant-welcome">
+							<img src="assistant.png" alt="Ассистент" />
+							<p>Это чат с администратором. Ты можешь с ним пообщаться по любому вопросу о нашем сервисе и узнать о ходе
+								работы</p>
+							<div class="buttons">
+								<button id="order-media">Заказать медиаплан</button>
+								<button id="order-report">Заказать отчет</button>
+							</div>
+						</div>
+					</div>
+					<div class="chat-input">
+						<input type="text" id="chat-message" placeholder="Введите сообщение для администратора" />
+						<button id="send-message">➤</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer class="footer">
+		<div class="container">
+			<div class="footer__wrapper">
+				<img class="footer__logo" width="219" height="32" src="images/logo-gray.svg" alt="Логотип Pink Chicken">
+				<a class="footer__conf" href="#">Политика конфиденциальности</a>
+				<div class="footer__mail">
+					<img class="footer__mail-icon" width="24" height="24" src="images/footer-mail.svg" alt="Наша почта">
+					<a class="footer__mail-link" aria-label="Отправить нам сообщение"
+						href="mailto:pinkchicken@adaurum.ru">pinkchicken@adaurum.ru</a>
+				</div>
+				<div class="footer__lang">
+					<img class="footer__lang-global" width="24" height="24" src="images/footer-lang.svg" alt="Выбрать язык">
+					<p class="footer__lang-ru">RU</p>
+					<p class="footer__lang-en">EN</p>
+					<p class="footer__lang-tur">TUR</p>
+				</div>
+				<div class="footer__socials">
+					<a class="footer__socials-item" href="#">
+						<img width="40" height="40" src="images/telegram.svg" alt="Telegram">
+					</a>
+					<a class="footer__socials-item" href="#">
+						<img width="40" height="40" src="images/watsapp.svg" alt="WarsApp">
+					</a>
+
+				</div>
+			</div>
+
+		</div>
+
+	</footer>
+
+
+	<script src="js/main.min.js"></script>
+</body>
+
+</html>
