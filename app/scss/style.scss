@@ -80,7 +80,7 @@
 	gap: 30px;
 	width: 100%;
 	max-width: 1200px;
-	height: 709px;
+	min-height: 709px;
 	margin-bottom: 60px;
 }
 
@@ -149,16 +149,72 @@
 		flex-grow: 1;
 		background-color: #EBEBEB;
 		border-radius: 20px;
-		padding-top: 50px;
 		display: flex;
 		flex-direction: column;
 	}
 
+	&__body-wrapper {
+		height: 100%;
+		max-height: 369px;
+		position: relative;
+		overflow: hidden
+	}
+
+	&__body-welcome,
+	.dashboard-chat__body-append {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		max-height: 369px;
+		transition: opacity 0.2s ease;
+	}
+
+	&__body-append {
+
+		overflow-y: auto;
+
+		&::-webkit-scrollbar {
+			width: 6px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: #B5B5B5;
+			border-radius: 54px;
+		}
+
+		&::-webkit-scrollbar-track {
+			background: transparent;
+		}
+
+		&::-webkit-scrollbar-button {
+			display: none;
+		}
+	}
+
+	&__message {
+		background-color: #fff;
+		border-radius: 20px;
+		padding: 16px 22px;
+		width: 541px;
+		margin: 40px 26px 40px auto;
+		position: relative;
+	}
+
+	&__message-time {
+		position: absolute;
+		bottom: -28px;
+		right: 0;
+		color: #525252;
+		font-size: 0.9375rem;
+		font-weight: 400;
+	}
+
 	&__body-welcome {
-		padding: 0 20px;
 
 		&__img {
-			margin: 0 auto 20px;
+			margin: 50px auto 20px;
 		}
 
 		&__text {
@@ -167,13 +223,15 @@
 			margin: 0 auto 57px;
 		}
 
-		&__buttons{
-			display: flex;
-			gap: 12px;
-		}
+	}
 
-		&__buttons-first,
-		.dashboard-chat__body-welcome__buttons-second {
+	&__body-buttons {
+		display: flex;
+		gap: 12px;
+		margin: 20px 0 20px 20px;
+
+		&__first,
+		.dashboard-chat__body-buttons__second {
 			border: none;
 			color: #fff;
 			padding: 12px 22px;
@@ -182,29 +240,37 @@
 			font-weight: 600;
 		}
 
-		&__buttons-first {
+		&__first {
 			background-color: #EE26C2;
 		}
 
-		&__buttons-second {
+		&__second {
 			background-color: #2676EE;
 		}
 	}
 
 	&__bottom {
 		width: 100%;
+		min-height: 144px;
 		flex-grow: 1;
 		border-radius: 20px;
 		border: 2px solid #EBEBEB;
 		background-color: #fff;
-		margin: 20px auto 1px;
+		margin: 0 auto;
 		display: flex;
 		flex-direction: column;
+		transition: border-color 0.2s ease;
+
+		&:focus-within {
+			border-color: #EE26C2;
+		}
 	}
 
 	&__bottom-input {
 		padding: 22px 18px;
 		border-radius: 20px;
+		border: none;
+		outline: none;
 
 		&::placeholder {
 			color: #525252;
@@ -222,7 +288,7 @@
 			display: flex;
 			gap: 20px;
 			align-items: end;
-			padding-bottom: 8px;
+			padding-bottom: 20px;
 		}
 
 		&__enter {
