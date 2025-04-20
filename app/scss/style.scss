@@ -1,7 +1,5 @@
-@import 'vars';
 @import 'fonts';
 @import 'reset';
-@import 'libs';
 @import 'global';
 
 
@@ -11,8 +9,8 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 0 20px;
-		height: 107px;
+		padding: 0 1.25rem;
+		height: 6.6875rem;
 	}
 
 	&__logo {
@@ -20,20 +18,31 @@
 		cursor: pointer;
 	}
 
+	&__info{
+		font-size: 1.125rem;
+		font-weight: 600;
+	}
+
 	&__percent,
 	&__username {
-		margin-right: 26px;
+		margin-right: 1.625rem;
 		display: flex;
 		align-items: center;
 	}
 
 	&__percent-icon,
 	&__username-icon {
-		margin-right: 10px;
+		margin-right: 0.624rem;
+	}
+
+	&__icons,
+	.header__info{
+		display: flex;
+		align-items: center;
 	}
 
 	&__settings {
-		margin-right: 12px;
+		margin-right: 0.75rem;
 	}
 
 	&__settings-icon,
@@ -49,20 +58,23 @@
 	font-weight: 500;
 
 	&__wrapper {
+		height: 5.9375rem;
+		
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: space-between;
+
 		align-items: center;
-		height: 95px;
 	}
 
 	&__mail {
 		display: flex;
-		gap: 12px;
+		gap: 0.75rem;
 	}
 
 	&__lang {
 		display: flex;
-		gap: 12px;
+		gap: 0.75rem;
 
 		img,
 		p {
@@ -76,39 +88,38 @@
 
 	&__socials {
 		display: flex;
-		gap: 12px;
+		gap: 0.75rem;
 	}
 }
 
-
 .dashboard {
 	display: flex;
-	gap: 30px;
+	gap: 1.875rem;
 	width: 100%;
 	max-width: 1200px;
-	min-height: 709px;
-	margin-bottom: 60px;
+	min-height: 44.3125rem;
+	margin-bottom: 3.75rem;
 }
 
 .dashboard-files,
 .dashboard-chat {
 	background: #fff;
-	border-radius: 20px;
-	box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+	border-radius: 1.25rem;
+	box-shadow: 0 0 1.875rem rgba(0, 0, 0, 0.08);
 }
 
 .dashboard-files {
-	width: 295px;
-	padding: 28px 20px;
+	width: 18.4375rem;
+	padding: 1.75rem 1.25rem;
 
 	&__info {
-		margin-top: 46px;
-		width: 261px;
-		min-height: 413px;
+		margin-top: 2.875rem;
+		width: 16.3125rem;
+		min-height: 25.8125rem;
 
 		&__img {
-			margin-bottom: 30px;
-			height: 314px;
+			margin-bottom: 1.875rem;
+			height: 19.625rem;
 			object-fit: cover;
 		}
 
@@ -120,26 +131,26 @@
 	&__wrapper {
 		display: flex;
 		flex-direction: column;
-		padding: 30px 0;
+		padding: 1.875rem 0;
 	}
 
 	&__media,
 	&__report {
 		display: flex;
 		flex-direction: column;
-		gap: 8px;
+		gap: 0.5rem;
 	}
 
 	&__media-title,
 	&__report-title {
-		margin-bottom: 20px;
+		margin-bottom: 1.25rem;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 	}
 
 	&__report-title {
-		margin-top: 30px;
+		margin-top: 1.875rem;
 	}
 
 	&__media-arrow {
@@ -151,7 +162,7 @@
 	}
 
 	&__media-document {
-		height: 42px;
+		height: 2.625rem;
 		display: flex;
 		align-items: center;
 		background-color: #f5f5f5;
@@ -160,19 +171,19 @@
 	}
 
 	&__note {
-		font-size: 12px;
+		font-size: 0.75rem;
 		font-weight: 400;
 	}
 }
 
 .dashboard-chat {
-	padding: 0 28px 28px;
+	padding: 0 1.75rem 1.75rem;
 	display: flex;
 	flex-direction: column;
-	width: 875px;
+	width: 54.6875rem;
 
 	&__top {
-		min-height: 85px;
+		min-height: 5.3125rem;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -184,9 +195,9 @@
 
 	&__top-name {
 		display: flex;
-		gap: 10px;
+		gap: 0.625rem;
 		font-size: 0.9375rem;
-		margin-right: 26px;
+		margin-right: 1.625rem;
 
 		&__first {
 			font-weight: 600;
@@ -205,24 +216,24 @@
 	&__top-more__inner {
 		position: absolute;
 		right: 0;
-		top: 49px;
-		padding: 8px 0;
+		top: 3.0625rem;
+		padding: 0.5rem 0;
 		text-align: right;
-		border-radius: 8px;
+		border-radius: 0.5rem;
 		background-color: #fff;
-		box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
-		width: 332px;
+		box-shadow: 0 0 1.875rem rgba(0, 0, 0, 0.08);
+		width: 20.75rem;
 		font-size: 1rem;
 		font-weight: 500;
 		color: #000;
 		display: flex;
 		flex-direction: column;
-		gap: 12px;
+		gap: 0.75rem;
 		z-index: 2;
 	}
 
 	&__top-more__inner-item {
-		padding: 8px 30px;
+		padding: 0.5rem 1.875rem;
 	}
 
 	&__top-more__inner-item:hover {
@@ -233,14 +244,14 @@
 	&__body {
 		flex-grow: 1;
 		background-color: #EBEBEB;
-		border-radius: 20px;
+		border-radius: 1.25rem;
 		display: flex;
 		flex-direction: column;
 	}
 
 	&__body-wrapper {
 		height: 100%;
-		max-height: 369px;
+		max-height: 23.0625rem;
 		position: relative;
 		overflow: hidden
 	}
@@ -252,7 +263,7 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		max-height: 369px;
+		max-height: 23.0625rem;
 		transition: opacity 0.2s ease;
 	}
 
@@ -262,12 +273,12 @@
 		scrollbar-gutter: stable;
 
 		&::-webkit-scrollbar {
-			width: 6px;
+			width: 0.375rem;
 		}
 
 		&::-webkit-scrollbar-thumb {
 			background-color: #B5B5B5;
-			border-radius: 54px;
+			border-radius: 3.375rem;
 		}
 
 		&::-webkit-scrollbar-track {
@@ -281,39 +292,39 @@
 
 
 	&__message {
-		margin: 40px 26px 40px auto;
+		margin: 2.5rem 1.625rem 2.5rem auto;
 	}
 
 	&__message,
 	.dashboard-chat__content {
 		position: relative;
 		background-color: #fff;
-		border-radius: 20px;
-		max-width: 541px;
-		padding: 16px 22px;
+		border-radius: 1.25rem;
+		max-width: 33.8125rem;
+		padding: 1rem 1.375rem;
 	}
 
 	&__content {
-		margin: 40px auto 40px 13px;
+		margin: 2.5rem auto 2.5rem 0.8125rem;
 	}
 
 	&__status {
 		display: flex;
 		align-items: center;
-		margin-left: 20px;
+		margin-left: 1.25rem;
 	}
 
 	&__status-time,
 	.dashboard-chat__message-time {
 		position: absolute;
-		bottom: -29px;
+		bottom: -1.8125rem;
 		color: #525252;
 		font-size: 0.9375rem;
 		font-weight: 400;
 	}
 
 	&__status-time {
-		left: 39px;
+		left: 2.4375rem;
 	}
 
 	&__message-time {
@@ -321,38 +332,38 @@
 	}
 
 	&__sender {
-		font-size: 18px;
+		font-size: 1.125rem;
 		font-weight: 600;
 		position: absolute;
-		bottom: -28px;
+		bottom: -1.75rem;
 		left: 0;
 	}
 
 	&__body-welcome {
 
 		&__img {
-			margin: 50px auto 20px;
+			margin: 3.125rem auto 1.25rem;
 		}
 
 		&__text {
 			text-align: center;
-			width: 470px;
-			margin: 0 auto 57px;
+			width: 29.375rem;
+			margin: 0 auto 3.5625rem;
 		}
 
 	}
 
 	&__body-buttons {
 		display: flex;
-		gap: 12px;
-		margin: 20px 0 20px 20px;
+		gap: 0.75rem;
+		margin: 1.25rem 0 1.25rem 1.25rem;
 
 		&__first,
 		.dashboard-chat__body-buttons__second {
 			border: none;
 			color: #fff;
-			padding: 12px 22px;
-			border-radius: 21px;
+			padding: 0.75rem 1.375rem;
+			border-radius: 1.3125rem;
 			font-size: 1rem;
 			font-weight: 600;
 		}
@@ -368,10 +379,10 @@
 
 	&__bottom {
 		width: 100%;
-		min-height: 146px;
+		min-height: 9.125rem;
 		flex-grow: 1;
-		border-radius: 20px;
-		border: 2px solid #EBEBEB;
+		border-radius: 1.25rem;
+		border: 0.125rem solid #EBEBEB;
 		background-color: #fff;
 		margin: 0 auto;
 		display: flex;
@@ -384,8 +395,8 @@
 	}
 
 	&__bottom-input {
-		padding: 22px 18px;
-		border-radius: 20px;
+		padding: 1.375rem 1.125rem;
+		border-radius: 1.25rem;
 		border: none;
 		outline: none;
 
@@ -399,23 +410,23 @@
 
 	&__bottom-buttons {
 		display: flex;
-		padding: 0 18px;
+		padding: 0 1.125rem;
 
 		&__add {
 			display: flex;
-			gap: 20px;
+			gap: 1.25rem;
 			align-items: end;
-			padding-bottom: 20px;
+			padding-bottom: 1.25rem;
 		}
 
 		&__enter {
 			margin-left: auto;
 			font-weight: 400;
-			font-size: 10px;
+			font-size: 0.625rem;
 			line-height: 135%;
 
 			img {
-				margin-bottom: 2px;
+				margin-bottom: 0.125rem;
 			}
 		}
 	}

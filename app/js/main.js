@@ -283,4 +283,4 @@ const btnMore = document.querySelector('.dashboard-chat__top-more');
 const windowMore = document.querySelector('.dashboard-chat__top-more__inner');
 btnMore.addEventListener('click', function(){
 	windowMore.classList.toggle('visually-hidden');
-})
+});

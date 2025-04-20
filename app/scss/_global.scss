@@ -29,11 +29,11 @@ main {
 }
 
 .title {
-	font-size: 24px;
+	font-size: 1.5rem;
 	font-weight: 600;
 }
 
-.logo{
+.logo {
 	cursor: pointer;
 }
 
@@ -50,10 +50,9 @@ main {
 }
 
 .show-more {
-  margin-left: auto;
-  padding: 10px 0;
-
-  color: #EE26C2;
-  font-size: 15px;
+	margin-left: auto;
+	padding: 0.625rem 0;
+	color: #EE26C2;
+	font-size: 15px;
 	font-weight: 400;
 }

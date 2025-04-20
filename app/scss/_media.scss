@@ -1,3 +1,174 @@
-// @media (max-width: 1235px, 768 планшеты, 480 мобилки) {
+// @media (max-width: 1235px, 768 планшеты, 375, 320) {
 
 // }
+
+@media (max-width: 1130px) {
+	body {
+		background-color: #fff;
+	}
+
+	.footer {
+		&__wrapper {
+			padding: 0 20px;
+			height: 162px;
+
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			grid-template-areas:
+				"logo conf conf"
+				"socials lang mail";
+		}
+
+		&__logo {
+			grid-area: logo;
+			align-self: end;
+		}
+
+		&__conf {
+			grid-area: conf;
+			align-self: end;
+			text-align: center;
+		}
+
+		&__socials {
+			grid-area: socials;
+		}
+
+		&__lang {
+			grid-area: lang;
+		}
+
+		&__mail {
+			grid-area: mail;
+		}
+	}
+
+	.dashboard {
+		flex-direction: column;
+		width: 100%;
+		min-height: auto;
+		align-items: center;
+	}
+
+	.dashboard-files {
+		width: 100%;
+		min-height: 405px;
+
+		&__info {
+			min-height: auto;
+			width: 100%;
+			max-width: 522px;
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			gap: 19px;
+
+			&__img {
+				flex-basis: 50%;
+				object-fit: contain;
+			}
+
+			&__text {
+				text-align: left;
+			}
+		}
+	}
+
+	.dashboard-chat {
+		width: 100%;
+
+		&__body-wrapper {
+			min-height: 365px;
+		}
+	}
+}
+
+@media (max-width: 790px) {
+	.header {
+		&__info {
+			font-size: 1rem;
+		}
+
+		&__logo {
+			img {
+				width: 209px;
+				height: auto;
+			}
+		}
+	}
+}
+
+@media (max-width: 755px) {
+	.header {
+		&__wrapper {
+			flex-wrap: wrap;
+			padding: 1.25rem;
+		}
+
+		&__logo {
+			flex-basis: 100%;
+
+			img {
+				width: 181px;
+				height: auto;
+			}
+		}
+
+		&__info {
+			font-size: 0.875rem;
+		}
+
+		&__percent,
+		.header__username-icon {
+			display: none;
+		}
+	}
+}
+
+
+@media (max-width: 620px) {
+
+
+	.footer {
+		&__wrapper {
+			padding: 36px 20px;
+			height: 292px;
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+			align-items: flex-start;
+		}
+
+		&__logo,
+		.footer__conf {
+			align-self: auto;
+		}
+
+		&__logo img {
+			height: 25px;
+			width: auto;
+		}
+
+		&__conf {
+			font-size: 14px;
+		}
+	}
+
+	.dashboard-files {
+		&__title {
+			margin-bottom: 28px;
+		}
+	}
+
+	.dashboard-chat {
+		padding: 28px;
+
+		&__top {
+			flex-wrap: wrap;
+		}
+
+		&__body-welcome__text {
+			font-size: 15px;
+		}
+	}
+}
