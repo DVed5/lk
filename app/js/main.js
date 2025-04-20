@@ -40,7 +40,6 @@ function simulateAsync(type) {
 const imgLeft = document.createElement('img');
 imgLeft.src = '../images/file-icon.svg';
 imgLeft.alt = 'Файл';
-imgLeft.classList.add('file-icon');
 
 // Название компании
 const nameEl = document.createElement('span');
@@ -51,7 +50,6 @@ nameEl.classList.add('document-name');
 const imgRight = document.createElement('img');
 imgRight.src = '../images/file-dwl.svg';
 imgRight.alt = 'Файл';
-imgRight.classList.add('file-icon');
 
 // Добавим элементы в нужном порядке
 documentBlock.appendChild(imgLeft);
@@ -67,6 +65,15 @@ documentBlock.appendChild(imgRight);
 	container.appendChild(documentBlock);
 	container.appendChild(statusEl);
 
+
+	if (type === 'media') {
+		handleShowMore(mediaFiles, 'show-more-media', 'media');
+	} else {
+		handleShowMore(reportFiles, 'show-more-report', 'report');
+	}
+
+
+
 	appendChatMessage("PinkChicken", `Заказ ${type === 'media' ? 'медиаплана' : 'отчета'} принят. Ожидайте.`);
 
 	setTimeout(() => {
@@ -75,12 +82,73 @@ documentBlock.appendChild(imgRight);
 
 		setTimeout(() => {
 			statusEl.remove();
-		}, 3500);
+		}, 2000);
 
 	}, 2000);
 
 
 }
+
+
+
+
+let mediaIndex = null;
+let reportIndex = null;
+const limit = 3;
+
+function handleShowMore(container, buttonId, type) {
+	const children = [...container.querySelectorAll('.dashboard-files__media-document, .dashboard-files__report-document')];
+	const button = document.getElementById(buttonId);
+
+	if (children.length <= limit) {
+		children.forEach(el => el.style.display = 'flex');
+		button.classList.add('visually-hidden');
+		return;
+	}
+
+	// Всегда показываем кнопку
+	button.classList.remove('visually-hidden');
+
+	// Устанавливаем начальный индекс при первом вызове или при добавлении нового документа
+	if (type === 'media') {
+		mediaIndex = (children.length - limit + children.length) % children.length;
+		showDocumentWindow(children, mediaIndex, limit);
+	} else {
+		reportIndex = (children.length - limit + children.length) % children.length;
+		showDocumentWindow(children, reportIndex, limit);
+	}
+
+	// Назначаем или переустанавливаем обработчик клика
+	button.onclick = () => {
+		if (type === 'media') {
+			mediaIndex = (mediaIndex - 1 + children.length) % children.length;
+			showDocumentWindow(children, mediaIndex, limit);
+		} else {
+			reportIndex = (reportIndex - 1 + children.length) % children.length;
+			showDocumentWindow(children, reportIndex, limit);
+		}
+	};
+}
+
+
+
+function showDocumentWindow(documents, startIndex, windowSize) {
+	const len = documents.length;
+
+	documents.forEach(el => {
+		el.style.display = 'none';
+	});
+
+	for (let i = 0; i < windowSize; i++) {
+		const index = (startIndex + i) % len;
+		documents[index].style.display = 'flex';
+	}
+}
+
+
+
+
+
 
 document.getElementById('order-media').addEventListener('click', () => simulateAsync('media'));
 document.getElementById('order-report').addEventListener('click', () => simulateAsync('report'));
@@ -98,4 +166,50 @@ document.getElementById('chat-message').addEventListener('keydown', (e) => {
 	if (e.key === 'Enter') {
 		document.getElementById('send-message').click();
 	}
+});
+
+
+document.getElementById('toggle-media').addEventListener('click', () => {
+	const documents = mediaFiles.querySelectorAll('.dashboard-files__media-document');
+	const showMoreBtn = document.getElementById('show-more-media');
+	const notes = mediaFiles.querySelectorAll('.dashboard-files__note');
+// Переключаем видимость документов
+documents.forEach(doc => {
+	doc.classList.toggle('visually-hidden');
+});
+	// Переключаем видимость кнопки "Показать еще"
+	if (showMoreBtn && !showMoreBtn.classList.contains('visually-hidden')) {
+		showMoreBtn.classList.toggle('visually-hidden');
+	}
+
+	// Переключаем видимость p с заметкой
+	notes.forEach(note => note.classList.toggle('visually-hidden'));
+
+	// Переключаем стрелку
+	document.getElementById('toggle-media').classList.toggle('collapsed');
+
+	// Проверяем, нужно ли показать кнопку "Показать еще" заново
+	if (!document.getElementById('toggle-media').classList.contains('collapsed')) {
+		handleShowMore(mediaFiles, 'show-more-media', 'media');
+	} else {
+		showMoreBtn.classList.add('visually-hidden');
+	}
+});
+
+document.getElementById('toggle-report').addEventListener('click', () => {
+	const documents = reportFiles.querySelectorAll('.dashboard-files__report-document');
+	const showMoreBtn = document.getElementById('show-more-report');
+	const notes = reportFiles.querySelectorAll('.dashboard-files__note');
+
+	documents.forEach(doc => {
+		doc.classList.toggle('visually-hidden');
+	});
+
+	if (showMoreBtn && !showMoreBtn.classList.contains('visually-hidden')) {
+		showMoreBtn.classList.toggle('visually-hidden');
+	}
+	notes.forEach(note => note.classList.toggle('visually-hidden'));
+
+
+	document.getElementById('toggle-report').classList.toggle('collapsed');
 });
