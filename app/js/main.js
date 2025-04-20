@@ -310,7 +310,7 @@ function checkFilesReady() {
 				icon.alt = '';
 				icon.classList.add('mobile-icon');
 				icon.style.cssText = 'width: 16px; height: 16px; margin-left: auto;';
-	
+
 				mobileMedia.appendChild(icon);
 			}
 		} else {
@@ -325,7 +325,7 @@ function checkFilesReady() {
 				icon.alt = '';
 				icon.classList.add('mobile-status-icon');
 				icon.style.cssText = 'width: 16px; height: 16px; margin-left: auto;';
-	
+
 				mobileReport.appendChild(icon);
 			}
 		} else {
