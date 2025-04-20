@@ -6,6 +6,8 @@
 npm-debug.*
 
 dist/
+src/
 node_modules/
 package-lock.json
-app/css/*
+gulpfile.mjs
+package.json
