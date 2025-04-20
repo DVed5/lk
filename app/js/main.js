@@ -36,35 +36,37 @@ function simulateAsync(type) {
 
 
 
-// Первая иконка
-const imgLeft = document.createElement('img');
-imgLeft.src = '../images/file-icon.svg';
-imgLeft.alt = 'Файл';
+	// Первая иконка
+	const imgLeft = document.createElement('img');
+	imgLeft.src = '../images/file-icon.svg';
+	imgLeft.alt = 'Файл';
 
-// Название компании
-const nameEl = document.createElement('span');
-nameEl.textContent = name;
-nameEl.classList.add('document-name');
+	// Название компании
+	const nameEl = document.createElement('span');
+	nameEl.textContent = name;
+	nameEl.classList.add('document-name');
 
-// Вторая иконка
-const imgRight = document.createElement('img');
-imgRight.src = '../images/file-dwl.svg';
-imgRight.alt = 'Файл';
+	// Вторая иконка
+	const imgRight = document.createElement('img');
+	imgRight.src = '../images/file-dwl.svg';
+	imgRight.alt = 'Файл';
 
-// Добавим элементы в нужном порядке
-documentBlock.appendChild(imgLeft);
-documentBlock.appendChild(nameEl);
-documentBlock.appendChild(imgRight);
+	//Иконка справа в процессе
+	const imgProcess = document.createElement('img');
+	imgProcess.src = '../images/file-process.svg';
+	imgProcess.alt = 'Файл';
+
+	// Добавим элементы в нужном порядке
+	documentBlock.appendChild(imgLeft);
+	documentBlock.appendChild(nameEl);
+	documentBlock.appendChild(imgProcess);
 
 	const statusEl = document.createElement('p');
 	statusEl.classList.add('dashboard-files__note');
-	statusEl.innerHTML = `
-	${type === 'media' ? 'Медиаплан формируется...' : 'Отчет формируется...'}
-`;
-
+	statusEl.innerHTML = `<img src="../images/status-icon.svg" alt="" style="display:inline; width:16px;height:16px;margin-right: 5px;vertical-align: middle;">${type === 'media' ? 'Медиаплан формируется...' : 'Отчет формируется...'}`;
+ 
 	container.appendChild(documentBlock);
 	container.appendChild(statusEl);
-
 
 	if (type === 'media') {
 		handleShowMore(mediaFiles, 'show-more-media', 'media');
@@ -72,13 +74,14 @@ documentBlock.appendChild(imgRight);
 		handleShowMore(reportFiles, 'show-more-report', 'report');
 	}
 
-
-
 	appendChatMessage("PinkChicken", `Заказ ${type === 'media' ? 'медиаплана' : 'отчета'} принят. Ожидайте.`);
 
 	setTimeout(() => {
-		statusEl.innerHTML = `${type === 'media' ? 'Медиаплан' : 'Отчет'} от ${new Date().toLocaleDateString('ru-RU')} готов</>`;
+		statusEl.classList.add('dashboard-files__note');
+		statusEl.innerHTML = `<img src="../images/ready-icon.svg" alt="" style="display:inline; width:16px;height:16px;margin-right: 5px;vertical-align: middle;">${type === 'media' ? 'Медиаплан' : 'Отчет'} от ${new Date().toLocaleDateString('ru-RU')} готов`;
 		appendChatMessage("PinkChicken", `${type === 'media' ? 'Медиаплан' : 'Отчет'} "${name}" сформирован`);
+
+		documentBlock.replaceChild(imgRight, imgProcess);
 
 		setTimeout(() => {
 			statusEl.remove();
@@ -97,7 +100,7 @@ let reportIndex = null;
 const limit = 3;
 
 function handleShowMore(container, buttonId, type) {
-	const children = [...container.querySelectorAll('.dashboard-files__media-document, .dashboard-files__report-document')];
+	const children = [...container.querySelectorAll('.dashboard-files__media-document')];
 	const button = document.getElementById(buttonId);
 
 	if (children.length <= limit) {
@@ -150,8 +153,56 @@ function showDocumentWindow(documents, startIndex, windowSize) {
 
 
 
-document.getElementById('order-media').addEventListener('click', () => simulateAsync('media'));
-document.getElementById('order-report').addEventListener('click', () => simulateAsync('report'));
+
+
+
+
+document.getElementById('order-media').addEventListener('click', () => {
+	const toggleArrow = document.getElementById('toggle-media');
+
+	// Если блок свернут — разворачиваем
+	if (toggleArrow.classList.contains('collapsed')) {
+		toggleArrow.classList.remove('collapsed');
+
+		// Показываем документы и кнопку
+		const documents = mediaFiles.querySelectorAll('.dashboard-files__media-document');
+		const notes = mediaFiles.querySelectorAll('.dashboard-files__note');
+		const showMoreBtn = document.getElementById('show-more-media');
+
+		documents.forEach(doc => doc.classList.remove('visually-hidden'));
+		notes.forEach(note => note.classList.remove('visually-hidden'));
+		showMoreBtn.classList.remove('visually-hidden');
+	}
+
+	// Продолжаем как обычно
+	simulateAsync('media');
+});
+
+
+
+
+
+
+
+document.getElementById('order-report').addEventListener('click', () => {
+	const toggleArrow = document.getElementById('toggle-report');
+
+	if (toggleArrow.classList.contains('collapsed')) {
+		toggleArrow.classList.remove('collapsed');
+
+		const documents = reportFiles.querySelectorAll('.dashboard-files__media-document');
+		const notes = reportFiles.querySelectorAll('.dashboard-files__note');
+		const showMoreBtn = document.getElementById('show-more-report');
+
+		documents.forEach(doc => doc.classList.remove('visually-hidden'));
+		notes.forEach(note => note.classList.remove('visually-hidden'));
+		showMoreBtn.classList.remove('visually-hidden');
+	}
+
+	simulateAsync('report');
+});
+
+
 
 document.getElementById('send-message').addEventListener('click', () => {
 	const input = document.getElementById('chat-message');
@@ -173,10 +224,10 @@ document.getElementById('toggle-media').addEventListener('click', () => {
 	const documents = mediaFiles.querySelectorAll('.dashboard-files__media-document');
 	const showMoreBtn = document.getElementById('show-more-media');
 	const notes = mediaFiles.querySelectorAll('.dashboard-files__note');
-// Переключаем видимость документов
-documents.forEach(doc => {
-	doc.classList.toggle('visually-hidden');
-});
+	// Переключаем видимость документов
+	documents.forEach(doc => {
+		doc.classList.toggle('visually-hidden');
+	});
 	// Переключаем видимость кнопки "Показать еще"
 	if (showMoreBtn && !showMoreBtn.classList.contains('visually-hidden')) {
 		showMoreBtn.classList.toggle('visually-hidden');
@@ -197,7 +248,7 @@ documents.forEach(doc => {
 });
 
 document.getElementById('toggle-report').addEventListener('click', () => {
-	const documents = reportFiles.querySelectorAll('.dashboard-files__report-document');
+	const documents = reportFiles.querySelectorAll('.dashboard-files__media-document');
 	const showMoreBtn = document.getElementById('show-more-report');
 	const notes = reportFiles.querySelectorAll('.dashboard-files__note');
 
@@ -210,6 +261,12 @@ document.getElementById('toggle-report').addEventListener('click', () => {
 	}
 	notes.forEach(note => note.classList.toggle('visually-hidden'));
 
-
 	document.getElementById('toggle-report').classList.toggle('collapsed');
+
+	// Проверяем, нужно ли показать кнопку "Показать еще" заново
+	if (!document.getElementById('toggle-report').classList.contains('collapsed')) {
+		handleShowMore(reportFiles, 'show-more-report', 'report');
+	} else {
+		showMoreBtn.classList.add('visually-hidden');
+	}
 });
