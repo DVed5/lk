@@ -1,3 +1,23 @@
+const mobileQuery = window.matchMedia('(max-width: 535px)');
+
+function handleScreenSizeChange(e) {
+	const filesMobile = document.querySelector('.dashboard-files__mobile-only');
+	const filesDecstop = document.querySelector('.dashboard-files');
+
+	if (e.matches) {
+		filesMobile.classList.remove('visually-hidden');
+		filesDecstop.classList.add('visually-hidden');
+	} else {
+		filesMobile.classList.add('visually-hidden');
+		filesDecstop.classList.remove('visually-hidden');
+	}
+}
+
+handleScreenSizeChange(mobileQuery);
+mobileQuery.addEventListener('change', handleScreenSizeChange);
+
+
+
 let mediaCount = 0;
 let reportCount = 0;
 
@@ -18,8 +38,6 @@ function appendChatMessage(sender, text, messageClass, timeClass) {
 	const message = document.createElement('div');
 	message.classList.add(messageClass);
 
-
-	// message.innerHTML = `<span class="dashboard-chat__sender">${sender}</span>${text} <span class="${timeClass}">${time}</span>`;
 
 	if (sender === 'Jim') {
 		message.innerHTML = `
@@ -94,6 +112,8 @@ function simulateAsync(type) {
 
 		documentBlock.replaceChild(imgRight, imgProcess);
 
+		checkFilesReady();
+
 		setTimeout(() => {
 			statusEl.remove();
 		}, 2000);
@@ -157,20 +177,12 @@ function showDocumentWindow(documents, startIndex, windowSize) {
 
 
 
-
-
-
-
-
-
 document.getElementById('order-media').addEventListener('click', () => {
 	const toggleArrow = document.getElementById('toggle-media');
 
-	// Если блок свернут — разворачиваем
 	if (toggleArrow.classList.contains('collapsed')) {
 		toggleArrow.classList.remove('collapsed');
 
-		// Показываем документы и кнопку
 		const documents = mediaFiles.querySelectorAll('.dashboard-files__media-document');
 		const notes = mediaFiles.querySelectorAll('.dashboard-files__note');
 		const showMoreBtn = document.getElementById('show-more-media');
@@ -180,13 +192,8 @@ document.getElementById('order-media').addEventListener('click', () => {
 		showMoreBtn.classList.remove('visually-hidden');
 	}
 
-	// Продолжаем как обычно
 	simulateAsync('media');
 });
-
-
-
-
 
 
 
@@ -230,22 +237,17 @@ document.getElementById('toggle-media').addEventListener('click', () => {
 	const documents = mediaFiles.querySelectorAll('.dashboard-files__media-document');
 	const showMoreBtn = document.getElementById('show-more-media');
 	const notes = mediaFiles.querySelectorAll('.dashboard-files__note');
-	// Переключаем видимость документов
 	documents.forEach(doc => {
 		doc.classList.toggle('visually-hidden');
 	});
-	// Переключаем видимость кнопки "Показать еще"
 	if (showMoreBtn && !showMoreBtn.classList.contains('visually-hidden')) {
 		showMoreBtn.classList.toggle('visually-hidden');
 	}
-
-	// Переключаем видимость p с заметкой
 	notes.forEach(note => note.classList.toggle('visually-hidden'));
 
-	// Переключаем стрелку
 	document.getElementById('toggle-media').classList.toggle('collapsed');
 
-	// Проверяем, нужно ли показать кнопку "Показать еще" заново
+	// Нужно ли показать кнопку "Показать еще" заново
 	if (!document.getElementById('toggle-media').classList.contains('collapsed')) {
 		ShowMore(mediaFiles, 'show-more-media', 'media');
 	} else {
@@ -269,7 +271,7 @@ document.getElementById('toggle-report').addEventListener('click', () => {
 
 	document.getElementById('toggle-report').classList.toggle('collapsed');
 
-	// Проверяем, нужно ли показать кнопку "Показать еще" заново
+	// Нужно ли показать кнопку "Показать еще" заново
 	if (!document.getElementById('toggle-report').classList.contains('collapsed')) {
 		ShowMore(reportFiles, 'show-more-report', 'report');
 	} else {
@@ -279,8 +281,56 @@ document.getElementById('toggle-report').addEventListener('click', () => {
 
 
 
+
 const btnMore = document.querySelector('.dashboard-chat__top-more');
 const windowMore = document.querySelector('.dashboard-chat__top-more__inner');
-btnMore.addEventListener('click', function(){
+btnMore.addEventListener('click', function () {
 	windowMore.classList.toggle('visually-hidden');
 });
+
+handleScreenSizeChange(mobileQuery);
+mobileQuery.addEventListener('change', handleScreenSizeChange);
+
+
+function checkFilesReady() {
+	if (window.matchMedia('(max-width: 375px)').matches) {
+		const mobileMedia = document.getElementById('mobile-media');
+		const mobileReport = document.getElementById('mobile-report');
+
+		const mediaDocs = mediaFiles.querySelectorAll('.dashboard-files__media-document');
+		const reportDocs = reportFiles.querySelectorAll('.dashboard-files__media-document');
+
+		// Добавляем active, если есть хотя бы один документ
+		if (mediaDocs.length > 0) {
+			mobileMedia.classList.add('active-media');
+
+			if (!mobileMedia.querySelector('.mobile-icon')) {
+				const icon = document.createElement('img');
+				icon.src = '../images/mobile-ready.svg';
+				icon.alt = '';
+				icon.classList.add('mobile-icon');
+				icon.style.cssText = 'width: 16px; height: 16px; margin-left: auto;';
+	
+				mobileMedia.appendChild(icon);
+			}
+		} else {
+			mobileMedia.classList.remove('active-media');
+		}
+
+		if (reportDocs.length > 0) {
+			mobileReport.classList.add('active-report');
+			if (!mobileReport.querySelector('.mobile-status-icon')) {
+				const icon = document.createElement('img');
+				icon.src = '../images/mobile-ready.svg';
+				icon.alt = '';
+				icon.classList.add('mobile-status-icon');
+				icon.style.cssText = 'width: 16px; height: 16px; margin-left: auto;';
+	
+				mobileReport.appendChild(icon);
+			}
+		} else {
+			mobileReport.classList.remove('active-report');
+		}
+	}
+}
+
