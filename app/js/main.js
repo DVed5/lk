@@ -8,7 +8,7 @@ const filesWrapper = document.querySelector('.dashboard-files__wrapper');
 const mediaFiles = document.getElementById('media-files');
 const reportFiles = document.getElementById('report-files');
 
-function appendChatMessage(sender, text) {
+function appendChatMessage(sender, text, messageClass, timeClass) {
 	chatWelcome.classList.add('visually-hidden');
 	chatBody.classList.remove('visually-hidden');
 
@@ -16,8 +16,27 @@ function appendChatMessage(sender, text) {
 	const time = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
 
 	const message = document.createElement('div');
-	message.classList.add('dashboard-chat__message');
-	message.innerHTML = ` ${text} <span class="dashboard-chat__message-time">${time}</span>`;
+	message.classList.add(messageClass);
+
+
+	// message.innerHTML = `<span class="dashboard-chat__sender">${sender}</span>${text} <span class="${timeClass}">${time}</span>`;
+
+	if (sender === 'Jim') {
+		message.innerHTML = `
+		
+				<img class="dashboard-chat__avatar" width="49" height="49" src="../images/admin-photo.png" alt="">
+				<div class="dashboard-chat__content">
+			<span class="dashboard-chat__sender">${sender}</span>${text} <span class="${timeClass}">${time}</span>
+				</div>
+		
+			`;
+	} else {
+		message.innerHTML = `
+		<span class="dashboard-chat__sender">${sender}</span>${text} <span class="${timeClass}">${time}</span>
+		`;
+	}
+
+
 	chatBody.appendChild(message);
 	chatBody.scrollTop = chatBody.scrollHeight;
 }
@@ -33,30 +52,22 @@ function simulateAsync(type) {
 	const documentBlock = document.createElement('div');
 	documentBlock.classList.add('dashboard-files__media-document');
 
-
-
-
-	// Первая иконка
 	const imgLeft = document.createElement('img');
 	imgLeft.src = '../images/file-icon.svg';
 	imgLeft.alt = 'Файл';
 
-	// Название компании
 	const nameEl = document.createElement('span');
 	nameEl.textContent = name;
 	nameEl.classList.add('document-name');
 
-	// Вторая иконка
 	const imgRight = document.createElement('img');
 	imgRight.src = '../images/file-dwl.svg';
 	imgRight.alt = 'Файл';
 
-	//Иконка справа в процессе
 	const imgProcess = document.createElement('img');
 	imgProcess.src = '../images/file-process.svg';
 	imgProcess.alt = 'Файл';
 
-	// Добавим элементы в нужном порядке
 	documentBlock.appendChild(imgLeft);
 	documentBlock.appendChild(nameEl);
 	documentBlock.appendChild(imgProcess);
@@ -64,42 +75,37 @@ function simulateAsync(type) {
 	const statusEl = document.createElement('p');
 	statusEl.classList.add('dashboard-files__note');
 	statusEl.innerHTML = `<img src="../images/status-icon.svg" alt="" style="display:inline; width:16px;height:16px;margin-right: 5px;vertical-align: middle;">${type === 'media' ? 'Медиаплан формируется...' : 'Отчет формируется...'}`;
- 
+
 	container.appendChild(documentBlock);
 	container.appendChild(statusEl);
 
 	if (type === 'media') {
-		handleShowMore(mediaFiles, 'show-more-media', 'media');
+		ShowMore(mediaFiles, 'show-more-media', 'media');
 	} else {
-		handleShowMore(reportFiles, 'show-more-report', 'report');
+		ShowMore(reportFiles, 'show-more-report', 'report');
 	}
 
-	appendChatMessage("PinkChicken", `Заказ ${type === 'media' ? 'медиаплана' : 'отчета'} принят. Ожидайте.`);
+	appendChatMessage("Jim", `Заказ ${type === 'media' ? 'медиаплана' : 'отчета'} принят. Ожидайте.`, 'dashboard-chat__status', 'dashboard-chat__status-time');
 
 	setTimeout(() => {
 		statusEl.classList.add('dashboard-files__note');
 		statusEl.innerHTML = `<img src="../images/ready-icon.svg" alt="" style="display:inline; width:16px;height:16px;margin-right: 5px;vertical-align: middle;">${type === 'media' ? 'Медиаплан' : 'Отчет'} от ${new Date().toLocaleDateString('ru-RU')} готов`;
-		appendChatMessage("PinkChicken", `${type === 'media' ? 'Медиаплан' : 'Отчет'} "${name}" сформирован`);
+		appendChatMessage("Jim", `${type === 'media' ? 'Медиаплан' : 'Отчет'} "${name}" сформирован`, 'dashboard-chat__status', 'dashboard-chat__status-time');
 
 		documentBlock.replaceChild(imgRight, imgProcess);
 
 		setTimeout(() => {
 			statusEl.remove();
 		}, 2000);
-
 	}, 2000);
-
-
 }
-
-
 
 
 let mediaIndex = null;
 let reportIndex = null;
 const limit = 3;
 
-function handleShowMore(container, buttonId, type) {
+function ShowMore(container, buttonId, type) {
 	const children = [...container.querySelectorAll('.dashboard-files__media-document')];
 	const button = document.getElementById(buttonId);
 
@@ -208,7 +214,7 @@ document.getElementById('send-message').addEventListener('click', () => {
 	const input = document.getElementById('chat-message');
 	const text = input.value.trim();
 	if (text) {
-		appendChatMessage("Вы", text);
+		appendChatMessage("", text, 'dashboard-chat__message', 'dashboard-chat__message-time');
 		input.value = '';
 	}
 });
@@ -241,7 +247,7 @@ document.getElementById('toggle-media').addEventListener('click', () => {
 
 	// Проверяем, нужно ли показать кнопку "Показать еще" заново
 	if (!document.getElementById('toggle-media').classList.contains('collapsed')) {
-		handleShowMore(mediaFiles, 'show-more-media', 'media');
+		ShowMore(mediaFiles, 'show-more-media', 'media');
 	} else {
 		showMoreBtn.classList.add('visually-hidden');
 	}
@@ -265,8 +271,16 @@ document.getElementById('toggle-report').addEventListener('click', () => {
 
 	// Проверяем, нужно ли показать кнопку "Показать еще" заново
 	if (!document.getElementById('toggle-report').classList.contains('collapsed')) {
-		handleShowMore(reportFiles, 'show-more-report', 'report');
+		ShowMore(reportFiles, 'show-more-report', 'report');
 	} else {
 		showMoreBtn.classList.add('visually-hidden');
 	}
 });
+
+
+
+const btnMore = document.querySelector('.dashboard-chat__top-more');
+const windowMore = document.querySelector('.dashboard-chat__top-more__inner');
+btnMore.addEventListener('click', function(){
+	windowMore.classList.toggle('visually-hidden');
+})
