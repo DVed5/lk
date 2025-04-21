@@ -1,5 +1,7 @@
 const basePath = "/lk";
 
+
+
 const mobileQuery = window.matchMedia('(max-width: 535px)');
 
 function handleScreenSizeChange(e) {
@@ -18,6 +20,7 @@ function handleScreenSizeChange(e) {
 handleScreenSizeChange(mobileQuery);
 mobileQuery.addEventListener('change', handleScreenSizeChange);
 
+window.addEventListener("resize", checkFilesReady);
 
 
 let mediaCount = 0;
@@ -40,23 +43,18 @@ function appendChatMessage(sender, text, messageClass, timeClass) {
 	const message = document.createElement('div');
 	message.classList.add(messageClass);
 
-
 	if (sender === 'Jim') {
 		message.innerHTML = `
-		
 				<img class="dashboard-chat__avatar" width="49" height="49" src="${basePath}/images/admin-photo.png" alt="">
 				<div class="dashboard-chat__content">
 			<span class="dashboard-chat__sender">${sender}</span>${text} <span class="${timeClass}">${time}</span>
 				</div>
-		
 			`;
 	} else {
 		message.innerHTML = `
 		<span class="dashboard-chat__sender">${sender}</span>${text} <span class="${timeClass}">${time}</span>
 		`;
 	}
-
-
 	chatBody.appendChild(message);
 	chatBody.scrollTop = chatBody.scrollHeight;
 }
@@ -114,51 +112,11 @@ function simulateAsync(type) {
 
 		documentBlock.replaceChild(imgRight, imgProcess);
 
-		checkFilesReady();
-
 		setTimeout(() => {
 			statusEl.remove();
+			checkFilesReady();
 		}, 2000);
 	}, 2000);
-}
-
-
-let mediaIndex = null;
-let reportIndex = null;
-const limit = 3;
-
-function ShowMore(container, buttonId, type) {
-	const children = [...container.querySelectorAll('.dashboard-files__media-document')];
-	const button = document.getElementById(buttonId);
-
-	if (children.length <= limit) {
-		children.forEach(el => el.style.display = 'flex');
-		button.classList.add('visually-hidden');
-		return;
-	}
-
-	// Всегда показываем кнопку
-	button.classList.remove('visually-hidden');
-
-	// Устанавливаем начальный индекс при первом вызове или при добавлении нового документа
-	if (type === 'media') {
-		mediaIndex = (children.length - limit + children.length) % children.length;
-		showDocumentWindow(children, mediaIndex, limit);
-	} else {
-		reportIndex = (children.length - limit + children.length) % children.length;
-		showDocumentWindow(children, reportIndex, limit);
-	}
-
-	// Назначаем или переустанавливаем обработчик клика
-	button.onclick = () => {
-		if (type === 'media') {
-			mediaIndex = (mediaIndex - 1 + children.length) % children.length;
-			showDocumentWindow(children, mediaIndex, limit);
-		} else {
-			reportIndex = (reportIndex - 1 + children.length) % children.length;
-			showDocumentWindow(children, reportIndex, limit);
-		}
-	};
 }
 
 
@@ -176,6 +134,40 @@ function showDocumentWindow(documents, startIndex, windowSize) {
 	}
 }
 
+let mediaIndex = null;
+let reportIndex = null;
+const limit = 3;
+
+function ShowMore(container, buttonId, type) {
+	const children = [...container.querySelectorAll('.dashboard-files__media-document')];
+	const button = document.getElementById(buttonId);
+
+	if (children.length <= limit) {
+		children.forEach(el => el.style.display = 'flex');
+		button.classList.add('visually-hidden');
+		return;
+	}
+
+	button.classList.remove('visually-hidden');
+
+	if (type === 'media') {
+		mediaIndex = (children.length - limit + children.length) % children.length;
+		showDocumentWindow(children, mediaIndex, limit);
+	} else {
+		reportIndex = (children.length - limit + children.length) % children.length;
+		showDocumentWindow(children, reportIndex, limit);
+	}
+
+	button.onclick = () => {
+		if (type === 'media') {
+			mediaIndex = (mediaIndex - 1 + children.length) % children.length;
+			showDocumentWindow(children, mediaIndex, limit);
+		} else {
+			reportIndex = (reportIndex - 1 + children.length) % children.length;
+			showDocumentWindow(children, reportIndex, limit);
+		}
+	};
+}
 
 
 
@@ -198,7 +190,6 @@ document.getElementById('order-media').addEventListener('click', () => {
 });
 
 
-
 document.getElementById('order-report').addEventListener('click', () => {
 	const toggleArrow = document.getElementById('toggle-report');
 
@@ -216,7 +207,6 @@ document.getElementById('order-report').addEventListener('click', () => {
 
 	simulateAsync('report');
 });
-
 
 
 document.getElementById('send-message').addEventListener('click', () => {
@@ -295,14 +285,14 @@ mobileQuery.addEventListener('change', handleScreenSizeChange);
 
 
 function checkFilesReady() {
-	if (window.matchMedia('(max-width: 375px)').matches) {
-		const mobileMedia = document.getElementById('mobile-media');
-		const mobileReport = document.getElementById('mobile-report');
+	const mobileMedia = document.getElementById('mobile-media');
+	const mobileReport = document.getElementById('mobile-report');
+	const mediaDocs = mediaFiles.querySelectorAll('.dashboard-files__media-document');
+	const reportDocs = reportFiles.querySelectorAll('.dashboard-files__media-document');
 
-		const mediaDocs = mediaFiles.querySelectorAll('.dashboard-files__media-document');
-		const reportDocs = reportFiles.querySelectorAll('.dashboard-files__media-document');
+	const isMobile = window.matchMedia('(max-width: 535px)').matches;
 
-		// Добавляем active, если есть хотя бы один документ
+	if (isMobile) {
 		if (mediaDocs.length > 0) {
 			mobileMedia.classList.add('active-media');
 
@@ -335,4 +325,6 @@ function checkFilesReady() {
 		}
 	}
 }
+
+
 
