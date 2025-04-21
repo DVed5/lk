@@ -73,7 +73,7 @@ function simulateAsync(type) {
 	documentBlock.classList.add('dashboard-files__media-document');
 
 	const imgLeft = document.createElement('img');
-	imgLeft.src = '${basePath}/images/file-icon.svg';
+	imgLeft.src = 'images/file-icon.svg';
 	imgLeft.alt = 'Файл';
 
 	const nameEl = document.createElement('span');
@@ -81,11 +81,11 @@ function simulateAsync(type) {
 	nameEl.classList.add('document-name');
 
 	const imgRight = document.createElement('img');
-	imgRight.src = '${basePath}/images/file-dwl.svg';
+	imgRight.src = 'images/file-dwl.svg';
 	imgRight.alt = 'Файл';
 
 	const imgProcess = document.createElement('img');
-	imgProcess.src = '${basePath}/images/file-process.svg';
+	imgProcess.src = 'images/file-process.svg';
 	imgProcess.alt = 'Файл';
 
 	documentBlock.appendChild(imgLeft);
@@ -308,7 +308,7 @@ function checkFilesReady() {
 
 			if (!mobileMedia.querySelector('.mobile-icon')) {
 				const icon = document.createElement('img');
-				icon.src = '${basePath}/images/mobile-ready.svg';
+				icon.src = 'images/mobile-ready.svg';
 				icon.alt = '';
 				icon.classList.add('mobile-icon');
 				icon.style.cssText = 'width: 16px; height: 16px; margin-left: auto;';
@@ -323,7 +323,7 @@ function checkFilesReady() {
 			mobileReport.classList.add('active-report');
 			if (!mobileReport.querySelector('.mobile-status-icon')) {
 				const icon = document.createElement('img');
-				icon.src = '${basePath}/images/mobile-ready.svg';
+				icon.src = 'images/mobile-ready.svg';
 				icon.alt = '';
 				icon.classList.add('mobile-status-icon');
 				icon.style.cssText = 'width: 16px; height: 16px; margin-left: auto;';
