@@ -40,6 +40,8 @@ function appendChatMessage(sender, text, messageClass, timeClass) {
 	const now = new Date();
 	const time = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
 
+	const safeText = escapeHTML(text);
+
 	const message = document.createElement('div');
 	message.classList.add(messageClass);
 
@@ -47,16 +49,25 @@ function appendChatMessage(sender, text, messageClass, timeClass) {
 		message.innerHTML = `
 				<img class="dashboard-chat__avatar" width="49" height="49" src="${basePath}/images/admin-photo.png" alt="">
 				<div class="dashboard-chat__content">
-			<span class="dashboard-chat__sender">${sender}</span>${text} <span class="${timeClass}">${time}</span>
+			<span class="dashboard-chat__sender">${sender}</span>${safeText} <span class="${timeClass}">${time}</span>
 				</div>
 			`;
 	} else {
 		message.innerHTML = `
-		<span class="dashboard-chat__sender">${sender}</span>${text} <span class="${timeClass}">${time}</span>
+		<span class="dashboard-chat__sender">${sender}</span>${safeText} <span class="${timeClass}">${time}</span>
 		`;
 	}
 	chatBody.appendChild(message);
 	chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function escapeHTML(str) {
+	return str
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
+		.replace(/"/g, "&quot;")
+		.replace(/'/g, "&#039;");
 }
 
 function simulateAsync(type) {
@@ -118,7 +129,6 @@ function simulateAsync(type) {
 		}, 2000);
 	}, 2000);
 }
-
 
 
 function showDocumentWindow(documents, startIndex, windowSize) {
@@ -279,9 +289,6 @@ const windowMore = document.querySelector('.dashboard-chat__top-more__inner');
 btnMore.addEventListener('click', function () {
 	windowMore.classList.toggle('visually-hidden');
 });
-
-handleScreenSizeChange(mobileQuery);
-mobileQuery.addEventListener('change', handleScreenSizeChange);
 
 
 function checkFilesReady() {
