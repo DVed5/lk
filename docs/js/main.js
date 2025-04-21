@@ -1,3 +1,5 @@
+const basePath = "/lk";
+
 const mobileQuery = window.matchMedia('(max-width: 535px)');
 
 function handleScreenSizeChange(e) {
@@ -42,7 +44,7 @@ function appendChatMessage(sender, text, messageClass, timeClass) {
 	if (sender === 'Jim') {
 		message.innerHTML = `
 		
-				<img class="dashboard-chat__avatar" width="49" height="49" src="../images/admin-photo.png" alt="">
+				<img class="dashboard-chat__avatar" width="49" height="49" src="${basePath}/images/admin-photo.png" alt="">
 				<div class="dashboard-chat__content">
 			<span class="dashboard-chat__sender">${sender}</span>${text} <span class="${timeClass}">${time}</span>
 				</div>
@@ -71,7 +73,7 @@ function simulateAsync(type) {
 	documentBlock.classList.add('dashboard-files__media-document');
 
 	const imgLeft = document.createElement('img');
-	imgLeft.src = '../images/file-icon.svg';
+	imgLeft.src = '${basePath}/images/file-icon.svg';
 	imgLeft.alt = 'Файл';
 
 	const nameEl = document.createElement('span');
@@ -79,11 +81,11 @@ function simulateAsync(type) {
 	nameEl.classList.add('document-name');
 
 	const imgRight = document.createElement('img');
-	imgRight.src = '../images/file-dwl.svg';
+	imgRight.src = '${basePath}/images/file-dwl.svg';
 	imgRight.alt = 'Файл';
 
 	const imgProcess = document.createElement('img');
-	imgProcess.src = '../images/file-process.svg';
+	imgProcess.src = '${basePath}/images/file-process.svg';
 	imgProcess.alt = 'Файл';
 
 	documentBlock.appendChild(imgLeft);
@@ -92,7 +94,7 @@ function simulateAsync(type) {
 
 	const statusEl = document.createElement('p');
 	statusEl.classList.add('dashboard-files__note');
-	statusEl.innerHTML = `<img src="../images/status-icon.svg" alt="" style="display:inline; width:16px;height:16px;margin-right: 5px;vertical-align: middle;">${type === 'media' ? 'Медиаплан формируется...' : 'Отчет формируется...'}`;
+	statusEl.innerHTML = `<img src="${basePath}/images/status-icon.svg" alt="" style="display:inline; width:16px;height:16px;margin-right: 5px;vertical-align: middle;">${type === 'media' ? 'Медиаплан формируется...' : 'Отчет формируется...'}`;
 
 	container.appendChild(documentBlock);
 	container.appendChild(statusEl);
@@ -107,7 +109,7 @@ function simulateAsync(type) {
 
 	setTimeout(() => {
 		statusEl.classList.add('dashboard-files__note');
-		statusEl.innerHTML = `<img src="../images/ready-icon.svg" alt="" style="display:inline; width:16px;height:16px;margin-right: 5px;vertical-align: middle;">${type === 'media' ? 'Медиаплан' : 'Отчет'} от ${new Date().toLocaleDateString('ru-RU')} готов`;
+		statusEl.innerHTML = `<img src="${basePath}/images/ready-icon.svg" alt="" style="display:inline; width:16px;height:16px;margin-right: 5px;vertical-align: middle;">${type === 'media' ? 'Медиаплан' : 'Отчет'} от ${new Date().toLocaleDateString('ru-RU')} готов`;
 		appendChatMessage("Jim", `${type === 'media' ? 'Медиаплан' : 'Отчет'} "${name}" сформирован`, 'dashboard-chat__status', 'dashboard-chat__status-time');
 
 		documentBlock.replaceChild(imgRight, imgProcess);
@@ -306,7 +308,7 @@ function checkFilesReady() {
 
 			if (!mobileMedia.querySelector('.mobile-icon')) {
 				const icon = document.createElement('img');
-				icon.src = '../images/mobile-ready.svg';
+				icon.src = '${basePath}/images/mobile-ready.svg';
 				icon.alt = '';
 				icon.classList.add('mobile-icon');
 				icon.style.cssText = 'width: 16px; height: 16px; margin-left: auto;';
@@ -321,7 +323,7 @@ function checkFilesReady() {
 			mobileReport.classList.add('active-report');
 			if (!mobileReport.querySelector('.mobile-status-icon')) {
 				const icon = document.createElement('img');
-				icon.src = '../images/mobile-ready.svg';
+				icon.src = '${basePath}/images/mobile-ready.svg';
 				icon.alt = '';
 				icon.classList.add('mobile-status-icon');
 				icon.style.cssText = 'width: 16px; height: 16px; margin-left: auto;';
